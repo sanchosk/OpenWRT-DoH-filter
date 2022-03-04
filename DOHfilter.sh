@@ -30,6 +30,6 @@ cat /tmp/DOH.txt | while read line; do ipset add DoH $line; done
 
 
 # list loaded, block the IPtables
-[ $(iptables -L OUTPUT   | grep DoH | wc -l) -gt 0 ] || iptables -I OUTPUT  -m set --match-set DoH src -j DROP
-[ $(iptables -L INPUT    | grep DoH | wc -l) -gt 0 ] || iptables -I INPUT   -m set --match-set DoH dst -j DROP
-[ $(iptables -L FORWARD  | grep DoH | wc -l) -gt 0 ] || iptables -I FORWARD -m set --match-set DoH dst -j DROP
+[ $(iptables -L OUTPUT   | grep DoH | wc -l) -gt 0 ] || iptables -A OUTPUT  -m set --match-set DoH src -j DROP
+[ $(iptables -L INPUT    | grep DoH | wc -l) -gt 0 ] || iptables -A INPUT   -m set --match-set DoH dst -j DROP
+[ $(iptables -L FORWARD  | grep DoH | wc -l) -gt 0 ] || iptables -A FORWARD -m set --match-set DoH dst -j DROP
